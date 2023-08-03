@@ -27,68 +27,46 @@ public class Main {
 		count[1] = Integer.parseInt(st.nextToken());
 		count[2] = Integer.parseInt(st.nextToken());
 		count[3] = Integer.parseInt(st.nextToken());
-		int[] temp = Arrays.copyOf(count, 4);
 		
-//		a:for(int i = 0; i < orizinLen; i++) {
-//			temp = Arrays.copyOf(count, 4);
-//			for(int j = 0; j < partLen; j++) {
-//				if(i+partLen > orizinLen) {
-//					break a;
-//				}
-//				if(orizinSet.charAt(i+j) == 'A') {
-//					temp[0]--;
-//				}else if(orizinSet.charAt(i+j) == 'C') {
-//					temp[1]--;
-//				}else if(orizinSet.charAt(i+j) == 'G') {
-//					temp[2]--;
-//				}else if(orizinSet.charAt(i+j) == 'T') {
-//					temp[3]--;
-//				}
-//			}
-//			for(int j = 0; j < 4; j++) {
-//				if(temp[j] > 0) {
-//					continue a;
-//				}
-//			}
-//			res++;
-//		}
-		int count = 0;
+		int cnt = 0;
 		for(int i = 0; i < orizinLen; i++) {
 			if(orizinSet.charAt(i) == 'A') {
-				temp[0]--;
+				count[0]--;
 			}else if(orizinSet.charAt(i) == 'C') {
-				temp[1]--;
+				count[1]--;
 			}else if(orizinSet.charAt(i) == 'G') {
-				temp[2]--;
+				count[2]--;
 			}else if(orizinSet.charAt(i) == 'T') {
-				temp[3]--;
+				count[3]--;
 			}
 			if(i + 1 >= partLen) {
 				for(int j = 0; j < 4; j++) {
-					if(temp[j] > 0) {
-						count = 0;
+					if(count[j] > 0) {
+						cnt = 0;
 						break;
 					}else {
-						count++;
+						cnt++;
 					}
 				}
-				if(count == 4) {
+				if(cnt == 4) {
 					res++;
-					count = 0;
+					cnt = 0;
 				}
 				if(orizinSet.charAt(i - (partLen - 1)) == 'A') {
-					temp[0]++;
+					count[0]++;
 				}else if(orizinSet.charAt(i - (partLen - 1)) == 'C') {
-					temp[1]++;
+					count[1]++;
 				}else if(orizinSet.charAt(i - (partLen - 1)) == 'G') {
-					temp[2]++;
+					count[2]++;
 				}else if(orizinSet.charAt(i - (partLen - 1)) == 'T') {
-					temp[3]++;
+					count[3]++;
 				}
 			}
 		}
 	
-		System.out.println(res);
+		bw.write(String.valueOf(res));
+		bw.flush();
+		bw.close();
 	}
 
 }
