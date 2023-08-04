@@ -18,9 +18,8 @@ public class Main {
 		}
 		
 		while(q.size() != 1) {
-			q.poll();
-			q.offer(q.peek());
-			q.poll();
+			q.poll(); // 맨위 한장 버리기
+			q.offer(q.poll()); //위에 한장 맨뒤로 넣기
 		}
 		
 		System.out.println(q.peek());
