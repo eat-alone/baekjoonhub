@@ -14,14 +14,12 @@ public class Main {
 		int N = Integer.parseInt(bf.readLine());
 		
 		for(int i = 1; i <= N; i++) {
-			q.offer(i);
+			q.offer(i);//n장의 카드 순서대로 넣기
 		}
 		
 		while(q.size() != 1) {
-			int i = 0;
 			q.poll();
-			i = q.peek();
-			q.offer(i);
+			q.offer(q.peek());
 			q.poll();
 		}
 		
