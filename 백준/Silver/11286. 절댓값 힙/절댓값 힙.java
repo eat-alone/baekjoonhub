@@ -3,50 +3,35 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Main {
-
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		PriorityQueue<Data> qu = new PriorityQueue<Data>();
+		StringBuilder sb = new StringBuilder();
+		PriorityQueue<int[]> qu = new PriorityQueue<int[]>(new Comparator<int[]>() {
+			@Override
+			public int compare(int[] a, int[] b) {
+				if(a[1] == b[1]) {
+					return a[0] - b[0];
+				}
+				return a[1] - b[1];
+			}
+		});
 		int N = Integer.parseInt(bf.readLine());
 
 		for(int i = 0; i < N; i++) {
 			int next = Integer.parseInt(bf.readLine());
+			int absnext = Math.abs(next);
 			if(next == 0) {
 				if(!qu.isEmpty()) {
-					System.out.println(qu.poll().getRealnum());
+					sb.append(qu.poll()[0]).append("\n");
 				}else {
-					System.out.println(0);
+					sb.append(0).append("\n");
 				}
 			}else {
-				qu.offer(new Data(next, Math.abs(next)));
+				qu.offer(new int[] {next, absnext});
 			}
-
 		}
-	}
-
-	static class Data implements Comparable<Data>{
-		int realnum;
-		int sqrnum;
-
-		Data(int real, int sqrt){
-			this.realnum = real;
-			this.sqrnum = sqrt;
-		}
-
-		public int getRealnum() {
-			return realnum;
-		}
-
-		@Override
-		public int compareTo(Data o) {
-			if(this.sqrnum == o.sqrnum) {
-				return this.realnum - o.realnum;
-			}
-			return this.sqrnum - o.sqrnum;
-		}
+		System.out.println(sb.toString());
 	}
 }
-
