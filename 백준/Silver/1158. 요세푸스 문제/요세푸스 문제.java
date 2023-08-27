@@ -1,40 +1,30 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		Queue<Integer> q = new ArrayDeque<Integer>();
 		StringTokenizer st = new StringTokenizer(bf.readLine());
 		StringBuilder sb = new StringBuilder();
 		
 		int N = Integer.parseInt(st.nextToken());
-		int K = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
 		
-		int[] arr = new int[N+1];
-		int[] res = new int[N];
 		for(int i = 1; i <= N; i++) {
-			arr[i] = i;
+			q.offer(i);
 		}
-		int idx = 0;
-		int idx2 = 0;
 		sb.append("<");
-		while(idx2 < N) {
-			for(int i = 0; i < K; i++) {
-				idx++;
-				if(idx > N) {
-					idx = 1;
-				}
-				if(arr[idx] == -1) {
-					i--;
-				}
+		while(!q.isEmpty()) {
+			for(int i = 0; i < M-1; i++) {
+				q.offer(q.poll());
 			}
-			sb.append(arr[idx]).append(", ");
-			arr[idx] = -1;
-			idx2++;
+			sb.append(q.poll()).append(", ");
 		}
 		sb.setLength(sb.length()-2);
 		sb.append(">");
