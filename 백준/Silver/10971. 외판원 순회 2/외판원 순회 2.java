@@ -36,7 +36,6 @@ public class Main {
 			toDo2();
 			return;
 		}
-		
 		for(int i = 0; i < N; i++) {
 			if(v[i]) {
 				continue;
@@ -48,7 +47,7 @@ public class Main {
 			v[i] = false;
 		}
 	}
-	
+
 	static void toDo2() {
 		int sum = 0;
 //		System.out.println(Arrays.toString(res));
@@ -70,11 +69,13 @@ public class Main {
 			}else {
 				sum += arr[res[i]][res[i+1]];
 			}
+			if(sum > min) {
+				return;
+			}
 		}
 //		System.out.println();
 		if(min > sum) {
 			min = sum;
 		}
 	}
-
 }
